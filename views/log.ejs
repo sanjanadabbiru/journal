@@ -1,0 +1,58 @@
+<% include partials/header%>
+
+<div class="container-fluid container-cust">
+
+	<dir id="user-detail">
+		<p>Timeline</p>
+		<hr>
+		<button>Year</button>
+		<hr>
+		<ul id="list">
+			<li><a href="#">2016</a></li>
+			<li><a href="#">2017</a></li>
+			<li><a href="#">2018</a></li>
+		</ul>
+	</dir>
+
+	<div>
+		<!-- ====AREA WHERE THE LOGS WILL BE DISPLAYED===== -->
+		<div id="main">
+			<ul id="list">
+				<div id="top-date"><p class="entered-sol-day" id="day">time</p></div>
+				<div id="below-date">
+					<% logs.forEach(function(log){ %>
+						<% if(log !== "\r\n") {%>
+							<li>
+								<dir class="entered-log">
+									<p class="entered-sol"><%=log.log_time%></p>
+									<p class="log_display"><%= log.data%></p>
+									<form class="del-form" 
+									method="POST" 
+									action="/del/<%=logs.indexOf(log)%>">
+									<input type="submit" id="del-button" value="X">
+									</form>
+								</dir>
+							</li>
+						<%} %>
+					<% }); %>
+				</div>
+			</ul>
+		</div>
+
+		<!-- AREA FROM WHERE THE INPUTS ARE BEING TAKEN -->
+		<div id="input">
+			<div id="character-count-div"><p id="character-count">Character count</p></div>
+			<form  action="/post" method="POST">
+			<a id="sol" name="time" href="#"></a>
+			<!-- TEXT AREA SHAPE -->
+			<dir id="shape">
+			<textarea name="log" id="log" autofocus placeholder="Type here...." value=""></textarea> 
+			</dir>
+			<button id="submit">LOG</button>
+		</form>
+		</div>
+	<!-- ============================================== -->
+	</div>
+	
+</div>
+<% include partials/footer %>
